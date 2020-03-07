@@ -78,5 +78,12 @@ public class MealController
 
     return new ResponseEntity<Meal>(meal.get(), HttpStatus.OK);
   }
+  
+  @RequestMapping(path = "/{mealId}", method = RequestMethod.DELETE)
+  public ResponseEntity<Meal> deleteMealById(@PathVariable("mealId") String mealId)
+  {
+    this.mealRepository.deleteById(mealId);
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
 
 }

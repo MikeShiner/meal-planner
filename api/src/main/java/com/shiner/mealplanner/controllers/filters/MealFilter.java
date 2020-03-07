@@ -10,10 +10,8 @@ import lombok.Data;
 public class MealFilter
 {
 
-  @NotNull
   ZonedDateTime startDate;
 
-  @NotNull
   ZonedDateTime endDate;
   
   public void setStartDate(String date) {
