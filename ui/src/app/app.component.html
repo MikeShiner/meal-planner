@@ -1,3 +1,22 @@
-<div id="titlebar" class="w-100 d-flex justify-content-center align-items-center">
-  <h3>Meal Planner</h3>
+<div class="container-flow">
+  <div id="titlebar" class="row no-gutters">
+    <div class="col-3 col-12-xs">
+      <h3>Meal Planner</h3>
+    </div>
+    <nav class="col d-flex justify-content-center align-items-center">
+      <button (click)="changeWeek(-7)">Prev.</button>
+      <span>{{ navDate | date: 'dd MMM yyyy'}}</span>
+      <button (click)="changeWeek(7)">Next.</button>
+    </nav>
+  </div>
 </div>
+
+<app-day-view [day]="'Monday'"></app-day-view>
+<app-day-view [day]="'Tuesday'"></app-day-view>
+<app-day-view [day]="'Wednesday'"></app-day-view>
+<app-day-view [day]="'Thursday'"></app-day-view>
+<app-day-view [day]="'Friday'"></app-day-view>
+
+<footer>
+
+</footer>
