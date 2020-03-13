@@ -118,3 +118,5 @@ buildNumber.properties
 .project
 .factorypath
 .classpath
+ui/dist
+pwa-serve/dist
