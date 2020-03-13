@@ -1,9 +1,11 @@
-<div class="day-header">{{day}}</div>
+<div class="day-header" [ngClass]="{ today: isToday, past: hasPast }">
+  {{ day | date: "EEEE dd MMMM" }}
+</div>
 <div class="option-pane row no-gutters">
-    <div class="col">
-        <button class="lunch-btn">Add Lunch</button>
-    </div>
-    <div class="col">
-        <button class="dinner-btn">Add Dinner</button>
-    </div>
+  <div class="col">
+    <button class="lunch-btn">Add Lunch</button>
+  </div>
+  <div class="col">
+    <button class="dinner-btn">Add Dinner</button>
+  </div>
 </div>

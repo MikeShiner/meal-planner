@@ -1,22 +1,28 @@
 <div class="container-flow">
   <div id="titlebar" class="row no-gutters">
-    <div class="col-3 col-12-xs">
-      <h3>Meal Planner</h3>
+    <div
+      class="col-3 col-12-xs d-flex justify-content-center align-items-center"
+    >
+      <h3>Meals</h3>
     </div>
     <nav class="col d-flex justify-content-center align-items-center">
-      <button (click)="changeWeek(-7)">Prev.</button>
-      <span>{{ navDate | date: 'dd MMM yyyy'}}</span>
-      <button (click)="changeWeek(7)">Next.</button>
+      <button (click)="changeWeek(-7)">
+        <i _ngcontent-c9="" class="now-ui-icons arrows-1_minimal-left"></i>
+      </button>
+      <span>{{ weekStarting$ | async | date: "dd MMM yyyy" }}</span>
+      <button (click)="changeWeek(7)">
+        <i _ngcontent-c9="" class="now-ui-icons arrows-1_minimal-right"></i>
+      </button>
     </nav>
   </div>
 </div>
 
-<app-day-view [day]="'Monday'"></app-day-view>
-<app-day-view [day]="'Tuesday'"></app-day-view>
-<app-day-view [day]="'Wednesday'"></app-day-view>
-<app-day-view [day]="'Thursday'"></app-day-view>
-<app-day-view [day]="'Friday'"></app-day-view>
+<app-day-view [date]="monday | async"></app-day-view>
+<app-day-view [date]="tuesday | async"></app-day-view>
+<app-day-view [date]="wednesday | async"></app-day-view>
+<app-day-view [date]="thursday | async"></app-day-view>
+<app-day-view [date]="friday | async"></app-day-view>
+<app-day-view [date]="saturday | async"></app-day-view>
+<app-day-view [date]="sunday | async"></app-day-view>
 
-<footer>
-
-</footer>
+<footer></footer>
