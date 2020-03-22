@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { MealEntry } from "../models/MealEntry";
 
 @Component({
   selector: "app-meal-selection-dialog",
@@ -21,7 +22,12 @@ export class MealSelectionDialogComponent implements OnInit {
 
   submitMeal() {
     if (this.addForm.status === "VALID") {
-      this.dialogRef.close(this.addForm.get("meal").value);
+      const mealEntry: MealEntry = {
+        date: this.data.day.toJSON(),
+        meals: {}
+      };
+      mealEntry.meals[this.data.type] = this.addForm.get("meal").value;
+      this.dialogRef.close(mealEntry);
     }
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MealSelectionDialogComponent } from "../meal-selection-dialog/meal-selection-dialog.component";
+import { MealsService } from "../meals.service";
+import { MealEntry } from "../models/MealEntry";
 
 @Component({
   selector: "app-day-view",
@@ -19,7 +21,7 @@ export class DayViewComponent implements OnInit {
   isToday: boolean;
   hasPast: boolean;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private mealsService: MealsService) {
     this.todaysDate = new Date();
     this.todaysDate.setHours(0, 0, 0, 0);
   }
@@ -32,8 +34,11 @@ export class DayViewComponent implements OnInit {
       data: { day: this.day, type }
     });
 
-    mealDialog.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    console.log(this.mealsService.getDay(this.day));
+    mealDialog.afterClosed().subscribe((entry: MealEntry) => {
+      if (!entry) return;
+      this.mealsService.upsertDay(entry);
+      console.log(this.mealsService.getDay(this.day));
     });
   }
 }
