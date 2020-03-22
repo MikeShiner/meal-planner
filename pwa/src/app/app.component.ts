@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   );
 
   monday: Observable<MealEntry> = this.weekStarting$.pipe(
-    map(startOfWeek => this.mealsService.getDay(this.addDay(startOfWeek, 1)))
+    map(startOfWeek => this.mealsService.getDay(startOfWeek))
   );
   tuesday: Observable<MealEntry> = this.weekStarting$.pipe(
     map(startOfWeek => this.mealsService.getDay(this.addDay(startOfWeek, 1)))

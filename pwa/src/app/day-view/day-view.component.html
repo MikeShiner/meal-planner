@@ -1,4 +1,4 @@
-<div [ngClass]="{ today: isToday, past: hasPast }">
+<div class="day-view" [ngClass]="{ today: isToday, past: hasPast }">
   <div class="day-header">
     {{ day | date: "EEEE dd MMMM" }}
   </div>
