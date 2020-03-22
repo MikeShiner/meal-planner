@@ -2,10 +2,10 @@
   {{ day | date: "EEEE dd MMMM" }}
 </div>
 <div class="option-pane row no-gutters">
-  <div class="col">
+  <div class="col" (click)="openMealSelection('lunch')">
     <button class="lunch-btn">Add Lunch</button>
   </div>
-  <div class="col">
+  <div class="col" (click)="openMealSelection('dinner')">
     <button class="dinner-btn">Add Dinner</button>
   </div>
 </div>

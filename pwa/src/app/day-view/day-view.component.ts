@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { MealSelectionDialogComponent } from "../meal-selection-dialog/meal-selection-dialog.component";
 
 @Component({
   selector: "app-day-view",
@@ -17,10 +19,14 @@ export class DayViewComponent implements OnInit {
   isToday: boolean;
   hasPast: boolean;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.todaysDate = new Date();
     this.todaysDate.setHours(0, 0, 0, 0);
   }
 
   ngOnInit(): void {}
+
+  openMealSelection(type: "lunch" | "dinner") {
+    this.dialog.open(MealSelectionDialogComponent);
+  }
 }

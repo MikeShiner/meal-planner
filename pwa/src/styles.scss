@@ -1,9 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
 
 body {
-    background-color: #f4f3ef;
+  background-color: #f4f3ef;
 }
 
 $colour-grey: #66615b;
+
+.cdk-global-scrollblock {
+  overflow-y: hidden;
+}
