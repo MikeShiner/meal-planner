@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Subject, Observable, BehaviorSubject } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 import { map } from "rxjs/operators";
-import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: "app-root",

@@ -1,1 +1,15 @@
-<p>meal-selection-dialog works!</p>
+<h3>{{ data.day | date: "dd MMMM" }}</h3>
+<form [formGroup]="addForm">
+  <div class="d-flex justify-content-center align-items-center">
+    <mat-form-field>
+      <mat-label>Add {{ data.type }}</mat-label>
+      <input matInput formControlName="meal" placeholder="Ex. Pizza" />
+      <mat-error *ngIf="addForm.get('meal').hasError('required')">
+        Meal is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="d-flex justify-content-center align-items-center p-3">
+    <button mat-button (click)="submitMeal()">Add</button>
+  </div>
+</form>

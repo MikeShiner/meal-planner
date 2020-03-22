@@ -8,8 +8,9 @@ import { MatInputModule } from "@angular/material/input";
 import { MatDialogModule } from "@angular/material/dialog";
 import { DayViewComponent } from "./day-view/day-view.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
+import { MealSelectionDialogComponent } from "./meal-selection-dialog/meal-selection-dialog.component";
+import { ReactiveFormsModule } from "@angular/forms";
 import { environment } from "../environments/environment";
-import { MealSelectionDialogComponent } from './meal-selection-dialog/meal-selection-dialog.component';
 
 @NgModule({
   declarations: [AppComponent, DayViewComponent, MealSelectionDialogComponent],
@@ -19,6 +20,7 @@ import { MealSelectionDialogComponent } from './meal-selection-dialog/meal-selec
     BrowserAnimationsModule,
     MatInputModule,
     MatDialogModule,
+    ReactiveFormsModule,
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production
     })
