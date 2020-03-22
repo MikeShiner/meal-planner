@@ -10,13 +10,15 @@ import { MealEntry } from "../models/MealEntry";
   styleUrls: ["./day-view.component.scss"]
 })
 export class DayViewComponent implements OnInit {
-  @Input() set date(date: Date) {
-    this.day = date;
-    this.hasPast = date < this.todaysDate;
-    this.isToday = date.valueOf() === this.todaysDate.valueOf();
+  @Input() set date(entry: MealEntry) {
+    this.entry = entry;
+    this.day = new Date(entry.date);
+    this.hasPast = this.day < this.todaysDate;
+    this.isToday = this.day.valueOf() === this.todaysDate.valueOf();
   }
 
   todaysDate: Date;
+  entry: MealEntry;
   day: Date;
   isToday: boolean;
   hasPast: boolean;
@@ -34,11 +36,9 @@ export class DayViewComponent implements OnInit {
       data: { day: this.day, type }
     });
 
-    console.log(this.mealsService.getDay(this.day));
     mealDialog.afterClosed().subscribe((entry: MealEntry) => {
       if (!entry) return;
-      this.mealsService.upsertDay(entry);
-      console.log(this.mealsService.getDay(this.day));
+      this.entry = this.mealsService.upsertDay(entry);
     });
   }
 }
