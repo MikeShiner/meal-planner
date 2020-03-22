@@ -1,17 +1,19 @@
-<div class="day-header" [ngClass]="{ today: isToday, past: hasPast }">
-  {{ day | date: "EEEE dd MMMM" }}
-</div>
-<div class="option-pane row no-gutters">
-  <div class="col" (click)="openMealSelection('lunch')">
-    <span class="lunch-btn" *ngIf="!!entry.meals.lunch">{{
-      entry.meals.lunch
-    }}</span>
-    <button class="lunch-btn" *ngIf="!entry.meals.lunch">Add Lunch</button>
+<div [ngClass]="{ today: isToday, past: hasPast }">
+  <div class="day-header">
+    {{ day | date: "EEEE dd MMMM" }}
   </div>
-  <div class="col" (click)="openMealSelection('dinner')">
-    <span class="dinner-btn" *ngIf="!!entry.meals.dinner">{{
-      entry.meals.dinner
-    }}</span>
-    <button class="dinner-btn" *ngIf="!entry.meals.dinner">Add Dinner</button>
+  <div class="option-pane row no-gutters">
+    <div class="col" (click)="openMealSelection('lunch')">
+      <span class="lunch-btn" *ngIf="!!entry.meals.lunch">{{
+        entry.meals.lunch
+      }}</span>
+      <button class="lunch-btn" *ngIf="!entry.meals.lunch">Add Lunch</button>
+    </div>
+    <div class="col" (click)="openMealSelection('dinner')">
+      <span class="dinner-btn" *ngIf="!!entry.meals.dinner">{{
+        entry.meals.dinner
+      }}</span>
+      <button class="dinner-btn" *ngIf="!entry.meals.dinner">Add Dinner</button>
+    </div>
   </div>
 </div>

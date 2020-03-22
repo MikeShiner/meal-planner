@@ -10,7 +10,12 @@
   font-weight: bold;
 }
 .past {
-  color: #ccc;
+  .day-header {
+    color: #ccc;
+  }
+  .option-pane {
+    color: #999;
+  }
 }
 .option-pane {
   width: 100%;
