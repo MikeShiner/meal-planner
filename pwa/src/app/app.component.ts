@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable, BehaviorSubject } from "rxjs";
+import { Observable, BehaviorSubject, combineLatest } from "rxjs";
 import { map } from "rxjs/operators";
 import { MealsService } from "./meals.service";
 import { MealEntry } from "./models/MealEntry";
+import { defaultWeek, compileWeek } from "./models/DefaultWeek";
 
 @Component({
   selector: "app-root",
@@ -14,27 +15,18 @@ export class AppComponent implements OnInit {
     this.getLastMonday()
   );
 
-  monday: Observable<MealEntry> = this.weekStarting$.pipe(
-    map(startOfWeek => this.mealsService.getDay(startOfWeek))
-  );
-  tuesday: Observable<MealEntry> = this.weekStarting$.pipe(
-    map(startOfWeek => this.mealsService.getDay(this.addDay(startOfWeek, 1)))
-  );
-  wednesday: Observable<MealEntry> = this.weekStarting$.pipe(
-    map(startOfWeek => this.mealsService.getDay(this.addDay(startOfWeek, 2)))
-  );
-  thursday: Observable<MealEntry> = this.weekStarting$.pipe(
-    map(startOfWeek => this.mealsService.getDay(this.addDay(startOfWeek, 3)))
-  );
-  friday: Observable<MealEntry> = this.weekStarting$.pipe(
-    map(startOfWeek => this.mealsService.getDay(this.addDay(startOfWeek, 4)))
-  );
-  saturday: Observable<MealEntry> = this.weekStarting$.pipe(
-    map(startOfWeek => this.mealsService.getDay(this.addDay(startOfWeek, 5)))
-  );
-  sunday: Observable<MealEntry> = this.weekStarting$.pipe(
-    map(startOfWeek => this.mealsService.getDay(this.addDay(startOfWeek, 6)))
-  );
+  week$: Observable<MealEntry[]> = combineLatest(
+    this.mealsService.mealCollection$,
+    this.weekStarting$
+  ).pipe(map(([meals, weekStarting]) => compileWeek(weekStarting, meals)));
+
+  monday: Observable<MealEntry> = this.week$.pipe(map(week => week[0]));
+  tuesday: Observable<MealEntry> = this.week$.pipe(map(week => week[1]));
+  wednesday: Observable<MealEntry> = this.week$.pipe(map(week => week[2]));
+  thursday: Observable<MealEntry> = this.week$.pipe(map(week => week[3]));
+  friday: Observable<MealEntry> = this.week$.pipe(map(week => week[4]));
+  saturday: Observable<MealEntry> = this.week$.pipe(map(week => week[5]));
+  sunday: Observable<MealEntry> = this.week$.pipe(map(week => week[6]));
 
   constructor(private mealsService: MealsService) {}
 
@@ -50,13 +42,6 @@ export class AppComponent implements OnInit {
     const date = new Date();
     const day = date.getDay() + 6;
     date.setDate(date.getDate() - (day === 0 ? 7 : day) + 7);
-    date.setHours(0, 0, 0, 0);
-    return date;
-  }
-
-  private addDay(weekStarting: Date, numberOfDays: number): Date {
-    const date = new Date(weekStarting);
-    date.setDate(weekStarting.getDate() + numberOfDays);
     date.setHours(0, 0, 0, 0);
     return date;
   }

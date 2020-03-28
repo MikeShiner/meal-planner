@@ -11,6 +11,7 @@ import { MealEntry } from "../models/MealEntry";
 })
 export class DayViewComponent implements OnInit {
   @Input() set date(entry: MealEntry) {
+    if (!entry) return;
     this.entry = entry;
     this.day = new Date(entry.date);
     this.hasPast = this.day < this.todaysDate;
@@ -38,7 +39,7 @@ export class DayViewComponent implements OnInit {
 
     mealDialog.afterClosed().subscribe((entry: MealEntry) => {
       if (!entry) return;
-      this.entry = this.mealsService.upsertDay(entry);
+      this.mealsService.upsertDay(entry);
     });
   }
 }
