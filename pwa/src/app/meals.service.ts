@@ -19,7 +19,6 @@ export class MealsService {
       .get<MealEntry[]>(MealsService.MEAL_COLLECTION_NAME)
       .pipe(
         map((collection: MealEntry[] = []) => {
-          console.log("Collection:", collection);
           let entryIndex = collection.findIndex(
             entry => entry.date === newEntry.date
           );

@@ -14,11 +14,16 @@ export class MealSelectionDialogComponent implements OnInit {
   });
   constructor(
     public dialogRef: MatDialogRef<MealSelectionDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { day: Date; type: string },
+    @Inject(MAT_DIALOG_DATA)
+    public data: { day: Date; type: string; value: string },
     private fb: FormBuilder
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (!!this.data.value) {
+      this.addForm.get("meal").setValue(this.data.value);
+    }
+  }
 
   submitMeal() {
     if (this.addForm.status === "VALID") {

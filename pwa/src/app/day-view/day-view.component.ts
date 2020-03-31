@@ -31,10 +31,10 @@ export class DayViewComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openMealSelection(type: "lunch" | "dinner") {
+  openMealSelection(type: "lunch" | "dinner", currentMeal: string) {
     const mealDialog = this.dialog.open(MealSelectionDialogComponent, {
       minWidth: "80vw",
-      data: { day: this.day, type }
+      data: { day: this.day, type, value: currentMeal }
     });
 
     mealDialog.afterClosed().subscribe((entry: MealEntry) => {
