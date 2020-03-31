@@ -3,6 +3,7 @@ const app = express();
 const port = 8080;
 const https = require('https');
 const http = require('http');
+const fs = require('fs');
 
 app.use(express.static('dist'));
 app.get('*', (req, res) => {
