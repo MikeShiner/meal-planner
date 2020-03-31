@@ -120,3 +120,4 @@ buildNumber.properties
 .classpath
 ui/dist
 pwa-serve/dist
+pwa-serve/certs/*
