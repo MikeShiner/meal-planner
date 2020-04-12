@@ -3,6 +3,9 @@ import { MatDialog } from "@angular/material/dialog";
 import { MealSelectionDialogComponent } from "../meal-selection-dialog/meal-selection-dialog.component";
 import { MealsService } from "../meals.service";
 import { MealEntry } from "../models/MealEntry";
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import { OptionsComponent } from '../options/options.component';
+import { Option } from '../options/option.enum';
 
 @Component({
   selector: "app-day-view",
@@ -24,12 +27,21 @@ export class DayViewComponent implements OnInit {
   isToday: boolean;
   hasPast: boolean;
 
-  constructor(public dialog: MatDialog, private mealsService: MealsService) {
+  constructor(public dialog: MatDialog, private _bottomSheet: MatBottomSheet, private mealsService: MealsService) {
     this.todaysDate = new Date();
     this.todaysDate.setHours(0, 0, 0, 0);
   }
 
   ngOnInit(): void {}
+
+  openOptions(type: "lunch" | "dinner", currentMeal: string) {
+    const ref: MatBottomSheetRef = this._bottomSheet.open(OptionsComponent);
+    ref.afterDismissed().subscribe((action: Option) => {
+      if(action === Option.EDIT) {
+        this.openMealSelection(type, currentMeal);
+      }
+    })
+  }
 
   openMealSelection(type: "lunch" | "dinner", currentMeal: string) {
     const mealDialog = this.dialog.open(MealSelectionDialogComponent, {
